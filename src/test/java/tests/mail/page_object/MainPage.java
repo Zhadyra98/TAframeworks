@@ -29,5 +29,9 @@ public class MainPage extends AbstractPage{
         driver.findElement(PASSWORD_ENTER_FIELD_LOCATOR).sendKeys(user.getPassword());
         return this;
     }
+    public InboxPage clickLoginButton(){
+        driver.findElement(LOGIN_ENTER_LOCATOR).click();
+        return new InboxPage(driver);
+    }
 
 }
