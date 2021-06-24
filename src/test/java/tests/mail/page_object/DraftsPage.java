@@ -14,7 +14,7 @@ public class DraftsPage extends AbstractPage{
     private static final By DRAFT_MESSAGES_LIST_LOCATOR =By.xpath("//span[@class='ll-sj__normal']");
     private static final By SEND_BUTTON_LOCATOR = By.xpath("//span[@tabindex='570']/span[@class='button2__txt']");
     private static final By SENT_MESSAGE_LOCATOR =By.xpath("//div[@class='layer-sent-page']");
-    private static final By SENT_MESSAGES_TAP_LOCATOR=By.xpath("//div[@class='nav__folder-name__txt'][contains(text(),'Отправленные')]");
+
     public DraftsPage (WebDriver driver){
         super(driver);
     }
@@ -45,7 +45,7 @@ public class DraftsPage extends AbstractPage{
         return this;
     }
     public SentMessagesPage moveSentMessagesPage(){
-        driver.findElement(SENT_MESSAGES_TAP_LOCATOR).click();
+        //driver.findElement(SENT_MESSAGES_TAP_LOCATOR).click();
         return new SentMessagesPage(driver);
     }
 }
