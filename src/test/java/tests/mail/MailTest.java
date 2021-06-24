@@ -1,30 +1,27 @@
 package tests.mail;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
 import org.testng.annotations.*;
+import patterns.singleton.WebDriverSingleton;
 import tests.mail.page_object.DraftsPage;
 import tests.mail.page_object.InboxPage;
 import tests.mail.page_object.MainPage;
+import tests.mail.page_object.SentMessagesPage;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class MailTest {
-    private WebDriver driver;
+    WebDriver driver;
     @BeforeClass(description = "Start browser")
     private void initBrowser() {
-        driver = new ChromeDriver();
+        driver= WebDriverSingleton.getWebDriverInstance();
         driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
     }
     @AfterClass(description = "close browser" )
     public void kill(){
-        //driver.close();
+        driver.close();
     }
 
     @Test(description = "Login To the System ", priority = 0)
@@ -40,6 +37,10 @@ public class MailTest {
     public void openMessageThatWasPlacedToDrafts() throws InterruptedException {
         Thread.sleep(4000);
         new DraftsPage(driver).openAndCheckMessagePlacedToDrafts().clickOnSendButton();
+    }
+    @Test(description = "check whether message was placed to sent messages tap" , priority = 3)
+    public void checkIsMessageSent() throws InterruptedException {
+        SentMessagesPage sentMessagesPage = new DraftsPage(driver).moveSentMessagesPage().checkWhetherMessageIsAtSentMessagesTap();
     }
 
 }
